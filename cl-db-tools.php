@@ -3,7 +3,7 @@
  * Plugin Name: CL Database Tools
  * Plugin URI: https://tabernawp.com/
  * Description: Advanced database administration and optimization tools for WordPress
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Carlos Longarela
  * Author URI: https://tabernawp.com/
  * Author Email: carlos@longarela.eu
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'CL_DB_TOOLS_VERSION', '1.0.4' );
+define( 'CL_DB_TOOLS_VERSION', '1.0.5' );
 define( 'CL_DB_TOOLS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CL_DB_TOOLS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_DB_TOOLS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
