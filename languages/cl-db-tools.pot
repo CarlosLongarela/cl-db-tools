@@ -1,0 +1,304 @@
+# Copyright (C) 2025 Carlos Longarela
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: CL Database Tools 1.0.0\n"
+"Report-Msgid-Bugs-To: https://tabernawp.com/\n"
+"POT-Creation-Date: 2025-01-14 12:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: cl-db-tools\n"
+
+#: admin/class-cl-db-admin.php
+msgid "Database Tools"
+msgstr ""
+
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+msgid "Important:"
+msgstr ""
+
+msgid "Always make a backup of your database before performing any optimization operations."
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Tables"
+msgstr ""
+
+msgid "Autoload Options"
+msgstr ""
+
+msgid "Posts Cleanup"
+msgstr ""
+
+msgid "Orphaned Data"
+msgstr ""
+
+msgid "WooCommerce"
+msgstr ""
+
+msgid "Optimizations"
+msgstr ""
+
+msgid "Database Overview"
+msgstr ""
+
+msgid "Total Size"
+msgstr ""
+
+msgid "Data Size"
+msgstr ""
+
+msgid "Index Size"
+msgstr ""
+
+msgid "Non-InnoDB Tables"
+msgstr ""
+
+msgid "Database Size Query"
+msgstr ""
+
+msgid "Database Tables"
+msgstr ""
+
+msgid "Tables Information Query"
+msgstr ""
+
+msgid "Table Name"
+msgstr ""
+
+msgid "Engine"
+msgstr ""
+
+msgid "Rows"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Optimize"
+msgstr ""
+
+msgid "Convert to InnoDB"
+msgstr ""
+
+msgid "The following tables are not using the InnoDB engine:"
+msgstr ""
+
+msgid "Current Engine"
+msgstr ""
+
+msgid "Convert All to InnoDB"
+msgstr ""
+
+msgid "Total Autoload Options"
+msgstr ""
+
+msgid "Total Autoload Size"
+msgstr ""
+
+msgid "Autoload Options Query"
+msgstr ""
+
+msgid "Option Name"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Disable Autoload"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Autosaves and Revisions Cleanup"
+msgstr ""
+
+msgid "Total Autosaves"
+msgstr ""
+
+msgid "Autosaves Query"
+msgstr ""
+
+msgid "Delete Autosaves"
+msgstr ""
+
+msgid "Keep last:"
+msgstr ""
+
+msgid "autosaves (0 = delete all)"
+msgstr ""
+
+msgid "Orphaned Postmeta"
+msgstr ""
+
+msgid "Orphaned Postmeta Entries"
+msgstr ""
+
+msgid "Find Orphaned Postmeta Query"
+msgstr ""
+
+msgid "Delete Orphaned Postmeta"
+msgstr ""
+
+msgid "Delete Orphaned Postmeta Query"
+msgstr ""
+
+msgid "Orphaned Usermeta"
+msgstr ""
+
+msgid "Orphaned Usermeta Entries"
+msgstr ""
+
+msgid "Find Orphaned Usermeta Query"
+msgstr ""
+
+msgid "Delete Orphaned Usermeta"
+msgstr ""
+
+msgid "Delete Orphaned Usermeta Query"
+msgstr ""
+
+msgid "WooCommerce Sessions"
+msgstr ""
+
+msgid "Total Sessions"
+msgstr ""
+
+msgid "Expired Sessions"
+msgstr ""
+
+msgid "Delete Expired Sessions"
+msgstr ""
+
+msgid "WooCommerce sessions table not found."
+msgstr ""
+
+msgid "Expired Transients"
+msgstr ""
+
+msgid "Delete Expired Transients"
+msgstr ""
+
+msgid "Database Optimizations"
+msgstr ""
+
+msgid "Optimize All Tables"
+msgstr ""
+
+msgid "This will optimize all database tables to reclaim unused space and improve performance."
+msgstr ""
+
+msgid "Copy Query"
+msgstr ""
+
+msgid "Execute Query"
+msgstr ""
+
+#: admin/class-cl-db-ajax-handler.php
+msgid "Security check failed."
+msgstr ""
+
+msgid "Query executed successfully."
+msgstr ""
+
+msgid "Invalid action."
+msgstr ""
+
+msgid "Table name is required."
+msgstr ""
+
+msgid "Table %s successfully converted to InnoDB."
+msgstr ""
+
+msgid "Failed to convert table %s to InnoDB."
+msgstr ""
+
+msgid "Conversion complete. Success: %1$d, Failed: %2$d"
+msgstr ""
+
+msgid "Option name is required."
+msgstr ""
+
+msgid "Autoload updated for option %s."
+msgstr ""
+
+msgid "Failed to update autoload."
+msgstr ""
+
+msgid "Option %s deleted successfully."
+msgstr ""
+
+msgid "Failed to delete option."
+msgstr ""
+
+msgid "Successfully deleted %d autosave posts."
+msgstr ""
+
+msgid "Failed to delete autosaves."
+msgstr ""
+
+msgid "Successfully deleted %d orphaned postmeta entries."
+msgstr ""
+
+msgid "Failed to delete orphaned postmeta."
+msgstr ""
+
+msgid "Successfully deleted %d orphaned usermeta entries."
+msgstr ""
+
+msgid "Failed to delete orphaned usermeta."
+msgstr ""
+
+msgid "Successfully deleted %d expired WooCommerce sessions."
+msgstr ""
+
+msgid "Failed to delete WooCommerce sessions."
+msgstr ""
+
+msgid "Successfully deleted expired transients."
+msgstr ""
+
+msgid "Failed to delete expired transients."
+msgstr ""
+
+msgid "Table %s optimized successfully."
+msgstr ""
+
+msgid "Failed to optimize table."
+msgstr ""
+
+msgid "Optimization complete. Success: %1$d, Failed: %2$d"
+msgstr ""
+
+#: assets/js/admin.js
+msgid "WARNING: This action will modify your database. Have you made a backup?"
+msgstr ""
+
+msgid "Are you sure you want to delete these items?"
+msgstr ""
+
+msgid "Query copied to clipboard!"
+msgstr ""
+
+msgid "Failed to copy query"
+msgstr ""
+
+msgid "Processing..."
+msgstr ""
+
+msgid "Operation completed successfully"
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
