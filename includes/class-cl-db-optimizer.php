@@ -249,6 +249,64 @@ class CL_DB_Optimizer {
 	}
 
 	/**
+	 * Delete orphaned WooCommerce order items
+	 *
+	 * @return int|false Number of deleted items or false on error
+	 */
+	public static function delete_orphaned_wc_order_items() {
+		global $wpdb;
+
+		if ( ! CL_DB_Analyzer::is_woocommerce_active() ) {
+			return false;
+		}
+
+		$query = CL_DB_Query_Builder::get_delete_orphaned_wc_order_items_query();
+
+		if ( false === $query ) {
+			return false;
+		}
+
+		$result = $wpdb->query( $query );
+
+		if ( false === $result ) {
+			CL_DB_Security::log( 'Error deleting orphaned WC order items: ' . $wpdb->last_error, 'error' );
+			return false;
+		}
+
+		CL_DB_Security::log( "Successfully deleted {$result} orphaned WooCommerce order items", 'notice' );
+		return $result;
+	}
+
+	/**
+	 * Delete orphaned WooCommerce order item meta
+	 *
+	 * @return int|false Number of deleted items or false on error
+	 */
+	public static function delete_orphaned_wc_order_itemmeta() {
+		global $wpdb;
+
+		if ( ! CL_DB_Analyzer::is_woocommerce_active() ) {
+			return false;
+		}
+
+		$query = CL_DB_Query_Builder::get_delete_orphaned_wc_order_itemmeta_query();
+
+		if ( false === $query ) {
+			return false;
+		}
+
+		$result = $wpdb->query( $query );
+
+		if ( false === $result ) {
+			CL_DB_Security::log( 'Error deleting orphaned WC order item meta: ' . $wpdb->last_error, 'error' );
+			return false;
+		}
+
+		CL_DB_Security::log( "Successfully deleted {$result} orphaned WooCommerce order item meta entries", 'notice' );
+		return $result;
+	}
+
+	/**
 	 * Optimize table
 	 *
 	 * @param string $table_name Table name.

@@ -51,6 +51,8 @@ class CL_DB_Ajax_Handler {
 		add_action( 'wp_ajax_cl_db_delete_orphaned_usermeta', array( $this, 'delete_orphaned_usermeta' ) );
 		add_action( 'wp_ajax_cl_db_delete_wc_sessions', array( $this, 'delete_wc_sessions' ) );
 		add_action( 'wp_ajax_cl_db_delete_expired_transients', array( $this, 'delete_expired_transients' ) );
+		add_action( 'wp_ajax_cl_db_delete_orphaned_wc_order_items', array( $this, 'delete_orphaned_wc_order_items' ) );
+		add_action( 'wp_ajax_cl_db_delete_orphaned_wc_order_itemmeta', array( $this, 'delete_orphaned_wc_order_itemmeta' ) );
 		add_action( 'wp_ajax_cl_db_optimize_table', array( $this, 'optimize_table' ) );
 		add_action( 'wp_ajax_cl_db_optimize_all_tables', array( $this, 'optimize_all_tables' ) );
 	}
@@ -401,6 +403,64 @@ class CL_DB_Ajax_Handler {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Failed to delete expired transients.', 'cl-db-tools' ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Delete orphaned WooCommerce order items
+	 *
+	 * @return void
+	 */
+	public function delete_orphaned_wc_order_items() {
+		$this->verify_request();
+
+		$result = CL_DB_Optimizer::delete_orphaned_wc_order_items();
+
+		if ( false !== $result ) {
+			wp_send_json_success(
+				array(
+					'message' => sprintf(
+						/* translators: %d: number of deleted items */
+						__( 'Successfully deleted %d orphaned WooCommerce order items.', 'cl-db-tools' ),
+						$result
+					),
+				)
+			);
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Failed to delete orphaned WooCommerce order items.', 'cl-db-tools' ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Delete orphaned WooCommerce order item meta
+	 *
+	 * @return void
+	 */
+	public function delete_orphaned_wc_order_itemmeta() {
+		$this->verify_request();
+
+		$result = CL_DB_Optimizer::delete_orphaned_wc_order_itemmeta();
+
+		if ( false !== $result ) {
+			wp_send_json_success(
+				array(
+					'message' => sprintf(
+						/* translators: %d: number of deleted items */
+						__( 'Successfully deleted %d orphaned WooCommerce order item meta entries.', 'cl-db-tools' ),
+						$result
+					),
+				)
+			);
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Failed to delete orphaned WooCommerce order item meta.', 'cl-db-tools' ),
 				)
 			);
 		}

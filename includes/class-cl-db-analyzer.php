@@ -18,6 +18,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 class CL_DB_Analyzer {
 
 	/**
+	 * WordPress core table suffixes (without prefix)
+	 *
+	 * These are the default tables created by a standard WordPress installation.
+	 * This list may need to be updated if WordPress adds new core tables.
+	 *
+	 * @var array
+	 */
+	private static $wp_core_tables = array(
+		'commentmeta',
+		'comments',
+		'links',
+		'options',
+		'postmeta',
+		'posts',
+		'term_relationships',
+		'term_taxonomy',
+		'termmeta',
+		'terms',
+		'usermeta',
+		'users',
+	);
+
+	/**
+	 * Check if a table is a WordPress core table
+	 *
+	 * @param string $table_name Full table name including prefix.
+	 * @return bool
+	 */
+	public static function is_wp_core_table( $table_name ) {
+		global $wpdb;
+
+		foreach ( self::$wp_core_tables as $core_table ) {
+			if ( $table_name === $wpdb->prefix . $core_table ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get WordPress core table suffixes
+	 *
+	 * @return array
+	 */
+	public static function get_wp_core_tables() {
+		return self::$wp_core_tables;
+	}
+
+	/**
 	 * Get all tables information
 	 *
 	 * @param bool $force Force refresh cache.
@@ -209,6 +259,56 @@ class CL_DB_Analyzer {
 		return array(
 			'count' => count( $transients ),
 			'items' => $transients,
+		);
+	}
+
+	/**
+	 * Get orphaned WooCommerce order items information
+	 *
+	 * @return array|false
+	 */
+	public static function get_orphaned_wc_order_items_info() {
+		global $wpdb;
+
+		$count_query = CL_DB_Query_Builder::get_orphaned_wc_order_items_count_query();
+
+		if ( false === $count_query ) {
+			return false;
+		}
+
+		$count = $wpdb->get_var( $count_query );
+
+		$items_query = CL_DB_Query_Builder::get_orphaned_wc_order_items_query();
+		$items = $wpdb->get_results( $items_query, ARRAY_A );
+
+		return array(
+			'count' => $count,
+			'items' => $items,
+		);
+	}
+
+	/**
+	 * Get orphaned WooCommerce order item meta information
+	 *
+	 * @return array|false
+	 */
+	public static function get_orphaned_wc_order_itemmeta_info() {
+		global $wpdb;
+
+		$count_query = CL_DB_Query_Builder::get_orphaned_wc_order_itemmeta_count_query();
+
+		if ( false === $count_query ) {
+			return false;
+		}
+
+		$count = $wpdb->get_var( $count_query );
+
+		$items_query = CL_DB_Query_Builder::get_orphaned_wc_order_itemmeta_query();
+		$items = $wpdb->get_results( $items_query, ARRAY_A );
+
+		return array(
+			'count' => $count,
+			'items' => $items,
 		);
 	}
 

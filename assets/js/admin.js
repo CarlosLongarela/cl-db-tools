@@ -255,6 +255,32 @@
 				CLDBTools.ajaxRequest('cl_db_delete_expired_transients', {}, $button);
 			});
 
+			// Delete orphaned WooCommerce order items
+			$(document).on('click', '.cl-delete-orphaned-wc-order-items', function(e) {
+				e.preventDefault();
+
+				const $button = $(this);
+
+				if (!confirm(clDbTools.i18n.confirmBackup)) {
+					return;
+				}
+
+				CLDBTools.ajaxRequest('cl_db_delete_orphaned_wc_order_items', {}, $button);
+			});
+
+			// Delete orphaned WooCommerce order item meta
+			$(document).on('click', '.cl-delete-orphaned-wc-order-itemmeta', function(e) {
+				e.preventDefault();
+
+				const $button = $(this);
+
+				if (!confirm(clDbTools.i18n.confirmBackup)) {
+					return;
+				}
+
+				CLDBTools.ajaxRequest('cl_db_delete_orphaned_wc_order_itemmeta', {}, $button);
+			});
+
 			// Optimize all tables
 			$(document).on('click', '.cl-optimize-all-tables', function(e) {
 				e.preventDefault();

@@ -374,15 +374,15 @@
 		color: var(--cl-text-light);
 		font-size: var(--cl-font-size-sm);
 		font-weight: normal;
-		white-space: nowrap;
 		border-radius: var(--cl-radius-md);
 		box-shadow: var(--cl-shadow-medium);
 		opacity: 0;
 		visibility: hidden;
 		transition: opacity 0.2s ease, visibility 0.2s ease;
 		z-index: 1000;
+		min-width: 150px;
 		max-width: 300px;
-		white-space: normal;
+		width: max-content;
 		text-align: center;
 		line-height: 1.4;
 	}
@@ -414,6 +414,11 @@
 .cl-db-na {
 	color: var(--cl-text-secondary);
 	font-style: italic;
+}
+
+/* Core table highlighting */
+.cl-db-core-table td:first-child {
+	border-inline-start: 3px solid var(--cl-color-success);
 }
 
 /* Buttons */

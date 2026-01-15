@@ -360,9 +360,18 @@ class CL_DB_Admin {
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ( $tables_info as $table ) : ?>
-						<tr>
-							<td><strong><?php echo esc_html( $table['table_name'] ); ?></strong></td>
+					<?php foreach ( $tables_info as $table ) :
+						$is_core = CL_DB_Analyzer::is_wp_core_table( $table['table_name'] );
+						$row_class = $is_core ? 'cl-db-core-table' : '';
+					?>
+						<tr class="<?php echo esc_attr( $row_class ); ?>">
+							<td>
+								<?php if ( $is_core ) : ?>
+									<strong class="cl-db-tooltip" aria-label="<?php esc_attr_e( 'WordPress core table', 'cl-db-tools' ); ?>"><?php echo esc_html( $table['table_name'] ); ?></strong>
+								<?php else : ?>
+									<strong><?php echo esc_html( $table['table_name'] ); ?></strong>
+								<?php endif; ?>
+							</td>
 							<td><?php echo esc_html( $table['engine'] ); ?></td>
 							<td><?php echo esc_html( number_format_i18n( $table['rows'] ) ); ?></td>
 							<td><?php echo esc_html( CL_DB_Analyzer::format_bytes( $table['data_length'] ) ); ?></td>
@@ -606,8 +615,76 @@ class CL_DB_Admin {
 	private function render_woocommerce_tab() {
 		$wc_sessions = CL_DB_Analyzer::get_wc_sessions_info();
 		$expired_transients = CL_DB_Analyzer::get_expired_transients_info();
+		$orphaned_wc_order_items = CL_DB_Analyzer::get_orphaned_wc_order_items_info();
+		$orphaned_wc_order_itemmeta = CL_DB_Analyzer::get_orphaned_wc_order_itemmeta_info();
 
 		?>
+		<div class="cl-db-section">
+			<h2><?php esc_html_e( 'Orphaned WooCommerce Order Items', 'cl-db-tools' ); ?></h2>
+
+			<?php if ( false !== $orphaned_wc_order_items ) : ?>
+				<div class="cl-db-stats">
+					<div class="cl-db-stat-box">
+						<h3><?php esc_html_e( 'Orphaned Order Items', 'cl-db-tools' ); ?></h3>
+						<p class="cl-db-stat-value"><?php echo esc_html( number_format_i18n( $orphaned_wc_order_items['count'] ) ); ?></p>
+					</div>
+				</div>
+
+				<div class="cl-db-query-display">
+					<h3><?php esc_html_e( 'Find Orphaned Order Items Query', 'cl-db-tools' ); ?></h3>
+					<?php $this->render_query_box( CL_DB_Query_Builder::get_orphaned_wc_order_items_query(), 'get_orphaned_wc_order_items' ); ?>
+				</div>
+
+				<?php if ( $orphaned_wc_order_items['count'] > 0 ) : ?>
+					<p>
+						<button class="button button-primary cl-delete-orphaned-wc-order-items" data-requires-backup="true">
+							<?php esc_html_e( 'Delete Orphaned Order Items', 'cl-db-tools' ); ?>
+						</button>
+					</p>
+
+					<div class="cl-db-query-display">
+						<h3><?php esc_html_e( 'Delete Orphaned Order Items Query', 'cl-db-tools' ); ?></h3>
+						<?php $this->render_query_box( CL_DB_Query_Builder::get_delete_orphaned_wc_order_items_query(), 'delete_orphaned_wc_order_items' ); ?>
+					</div>
+				<?php endif; ?>
+			<?php else : ?>
+				<p><?php esc_html_e( 'WooCommerce order items table not found.', 'cl-db-tools' ); ?></p>
+			<?php endif; ?>
+		</div>
+
+		<div class="cl-db-section">
+			<h2><?php esc_html_e( 'Orphaned WooCommerce Order Item Meta', 'cl-db-tools' ); ?></h2>
+
+			<?php if ( false !== $orphaned_wc_order_itemmeta ) : ?>
+				<div class="cl-db-stats">
+					<div class="cl-db-stat-box">
+						<h3><?php esc_html_e( 'Orphaned Order Item Meta', 'cl-db-tools' ); ?></h3>
+						<p class="cl-db-stat-value"><?php echo esc_html( number_format_i18n( $orphaned_wc_order_itemmeta['count'] ) ); ?></p>
+					</div>
+				</div>
+
+				<div class="cl-db-query-display">
+					<h3><?php esc_html_e( 'Find Orphaned Order Item Meta Query', 'cl-db-tools' ); ?></h3>
+					<?php $this->render_query_box( CL_DB_Query_Builder::get_orphaned_wc_order_itemmeta_query(), 'get_orphaned_wc_order_itemmeta' ); ?>
+				</div>
+
+				<?php if ( $orphaned_wc_order_itemmeta['count'] > 0 ) : ?>
+					<p>
+						<button class="button button-primary cl-delete-orphaned-wc-order-itemmeta" data-requires-backup="true">
+							<?php esc_html_e( 'Delete Orphaned Order Item Meta', 'cl-db-tools' ); ?>
+						</button>
+					</p>
+
+					<div class="cl-db-query-display">
+						<h3><?php esc_html_e( 'Delete Orphaned Order Item Meta Query', 'cl-db-tools' ); ?></h3>
+						<?php $this->render_query_box( CL_DB_Query_Builder::get_delete_orphaned_wc_order_itemmeta_query(), 'delete_orphaned_wc_order_itemmeta' ); ?>
+					</div>
+				<?php endif; ?>
+			<?php else : ?>
+				<p><?php esc_html_e( 'WooCommerce order item meta table not found.', 'cl-db-tools' ); ?></p>
+			<?php endif; ?>
+		</div>
+
 		<div class="cl-db-section">
 			<h2><?php esc_html_e( 'WooCommerce Sessions', 'cl-db-tools' ); ?></h2>
 

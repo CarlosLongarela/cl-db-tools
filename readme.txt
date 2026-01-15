@@ -4,7 +4,7 @@ Donate link: https://tabernawp.com/donaciones/
 Tags: database, optimization, cleanup, performance, mysql
 Requires at least: 5.8
 Tested up to: 6.7
-Stable tag: 1.0.6
+Stable tag: 1.0.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,21 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 
 == Changelog ==
 
+= 1.0.9 =
+* Added orphaned WooCommerce order items cleanup
+* Added orphaned WooCommerce order item meta cleanup
+* New sections in WooCommerce tab for orphaned data management
+
+= 1.0.8 =
+* Replaced "Core" badge with tooltip on table name hover
+* Core tables now show green left border and tooltip "WordPress core table"
+* Adjusted tooltip dimensions (min 150px, max 300px)
+
+= 1.0.7 =
+* Added visual highlighting for WordPress core tables with green badge
+* Core tables now display "Core" badge for easy identification
+* Added configurable array of core table names for future compatibility
+
 = 1.0.6 =
 * Added "Created" column to tables list showing table creation date
 * Added tooltip explaining that this date may change after OPTIMIZE or ALTER operations
@@ -120,6 +135,15 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 * SQL query display and copy functionality
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+Added WooCommerce orphaned order items and order item meta cleanup functionality.
+
+= 1.0.8 =
+Core tables now show tooltip on hover instead of badge. Cleaner UI.
+
+= 1.0.7 =
+WordPress core tables are now visually highlighted with a green "Core" badge.
 
 = 1.0.6 =
 Added table creation date column with informative tooltip. UI improvements.

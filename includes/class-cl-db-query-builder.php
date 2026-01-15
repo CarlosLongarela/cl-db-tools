@@ -486,6 +486,169 @@ class CL_DB_Query_Builder {
 	}
 
 	/**
+	 * Get query to show orphaned WooCommerce order item meta
+	 *
+	 * @param int $limit Maximum number of results (default 100).
+	 * @return string|false
+	 */
+	public static function get_orphaned_wc_order_itemmeta_query( $limit = 100 ) {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		$limit = absint( $limit );
+		if ( $limit <= 0 ) {
+			$limit = 100;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return $wpdb->prepare(
+			"SELECT
+				oim.meta_id,
+				oim.order_item_id,
+				oim.meta_key,
+				LENGTH(oim.meta_value) as 'size'
+			FROM `{$table_name}` oim
+			LEFT JOIN `{$items_table}` oi ON oim.order_item_id = oi.order_item_id
+			WHERE oi.order_item_id IS NULL
+			ORDER BY oim.meta_id
+			LIMIT %d",
+			$limit
+		);
+	}
+
+	/**
+	 * Get query to count orphaned WooCommerce order item meta
+	 *
+	 * @return string|false
+	 */
+	public static function get_orphaned_wc_order_itemmeta_count_query() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return "SELECT COUNT(*) as 'count'
+			FROM `{$table_name}` oim
+			LEFT JOIN `{$items_table}` oi ON oim.order_item_id = oi.order_item_id
+			WHERE oi.order_item_id IS NULL";
+	}
+
+	/**
+	 * Get query to delete orphaned WooCommerce order item meta
+	 *
+	 * @return string|false
+	 */
+	public static function get_delete_orphaned_wc_order_itemmeta_query() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return "DELETE oim FROM `{$table_name}` oim
+			LEFT JOIN `{$items_table}` oi ON oim.order_item_id = oi.order_item_id
+			WHERE oi.order_item_id IS NULL";
+	}
+
+	/**
+	 * Get query to show orphaned WooCommerce order items (items without orders)
+	 *
+	 * @param int $limit Maximum number of results (default 100).
+	 * @return string|false
+	 */
+	public static function get_orphaned_wc_order_items_query( $limit = 100 ) {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		$limit = absint( $limit );
+		if ( $limit <= 0 ) {
+			$limit = 100;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return $wpdb->prepare(
+			"SELECT
+				oi.order_item_id,
+				oi.order_item_name,
+				oi.order_item_type,
+				oi.order_id
+			FROM `{$table_name}` oi
+			LEFT JOIN {$wpdb->posts} p ON oi.order_id = p.ID
+			WHERE p.ID IS NULL
+			ORDER BY oi.order_item_id
+			LIMIT %d",
+			$limit
+		);
+	}
+
+	/**
+	 * Get query to count orphaned WooCommerce order items
+	 *
+	 * @return string|false
+	 */
+	public static function get_orphaned_wc_order_items_count_query() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return "SELECT COUNT(*) as 'count'
+			FROM `{$table_name}` oi
+			LEFT JOIN {$wpdb->posts} p ON oi.order_id = p.ID
+			WHERE p.ID IS NULL";
+	}
+
+	/**
+	 * Get query to delete orphaned WooCommerce order items
+	 *
+	 * @return string|false
+	 */
+	public static function get_delete_orphaned_wc_order_items_query() {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
+
+		if ( ! $table_exists ) {
+			return false;
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return "DELETE oi FROM `{$table_name}` oi
+			LEFT JOIN {$wpdb->posts} p ON oi.order_id = p.ID
+			WHERE p.ID IS NULL";
+	}
+
+	/**
 	 * Get query to optimize table
 	 *
 	 * @param string $table_name Table name.
