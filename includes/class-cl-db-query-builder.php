@@ -120,7 +120,7 @@ class CL_DB_Query_Builder {
 				LENGTH(option_value) as 'size',
 				autoload
 			FROM {$wpdb->options}
-			WHERE autoload = 'yes'
+			WHERE autoload IN ('yes', 'on')
 			ORDER BY LENGTH(option_value) DESC
 			LIMIT %d",
 			$limit
@@ -135,28 +135,25 @@ class CL_DB_Query_Builder {
 	public static function get_autoload_total_query() {
 		global $wpdb;
 
-		return $wpdb->prepare(
-			"SELECT
+		return "SELECT
 				COUNT(*) as 'count',
 				SUM(LENGTH(option_value)) as 'total_size'
 			FROM {$wpdb->options}
-			WHERE autoload = %s",
-			'yes'
-		);
+			WHERE autoload IN ('yes', 'on')";
 	}
 
 	/**
 	 * Get query to update autoload value
 	 *
 	 * @param string $option_name Option name.
-	 * @param string $autoload_value New autoload value ('yes' or 'no').
+	 * @param string $autoload_value New autoload value ('yes', 'on', or 'no', 'off').
 	 * @return string|false
 	 */
 	public static function get_update_autoload_query( $option_name, $autoload_value ) {
 		global $wpdb;
 
 		$option_name = CL_DB_Security::sanitize_option_name( $option_name );
-		$autoload_value = ( 'yes' === $autoload_value ) ? 'yes' : 'no';
+		$autoload_value = in_array( $autoload_value, array( 'yes', 'on' ), true ) ? 'on' : 'off';
 
 		return $wpdb->prepare(
 			"UPDATE {$wpdb->options} SET autoload = %s WHERE option_name = %s",
@@ -434,6 +431,76 @@ class CL_DB_Query_Builder {
 			LEFT JOIN {$wpdb->options} b ON b.option_name = REPLACE(a.option_name, '_transient_timeout_', '_transient_')
 			WHERE a.option_name LIKE %s
 			AND a.option_value < UNIX_TIMESTAMP()",
+			$like_pattern
+		);
+	}
+
+	/**
+	 * Get query to show all transients
+	 *
+	 * @param int $limit Maximum number of results (default 100).
+	 * @return string
+	 */
+	public static function get_all_transients_query( $limit = 100 ) {
+		global $wpdb;
+
+		$limit = absint( $limit );
+		if ( $limit <= 0 ) {
+			$limit = 100;
+		}
+
+		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
+		$exclude_pattern = $wpdb->esc_like( '_transient_timeout_' ) . '%';
+
+		return $wpdb->prepare(
+			"SELECT
+				option_name,
+				LENGTH(option_value) as 'size'
+			FROM {$wpdb->options}
+			WHERE option_name LIKE %s
+			AND option_name NOT LIKE %s
+			ORDER BY LENGTH(option_value) DESC
+			LIMIT %d",
+			$like_pattern,
+			$exclude_pattern,
+			$limit
+		);
+	}
+
+	/**
+	 * Get query to count all transients
+	 *
+	 * @return string
+	 */
+	public static function get_all_transients_count_query() {
+		global $wpdb;
+
+		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
+		$exclude_pattern = $wpdb->esc_like( '_transient_timeout_' ) . '%';
+
+		return $wpdb->prepare(
+			"SELECT COUNT(*) as 'count'
+			FROM {$wpdb->options}
+			WHERE option_name LIKE %s
+			AND option_name NOT LIKE %s",
+			$like_pattern,
+			$exclude_pattern
+		);
+	}
+
+	/**
+	 * Get query to delete all transients
+	 *
+	 * @return string
+	 */
+	public static function get_delete_all_transients_query() {
+		global $wpdb;
+
+		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
+
+		return $wpdb->prepare(
+			"DELETE FROM {$wpdb->options}
+			WHERE option_name LIKE %s",
 			$like_pattern
 		);
 	}

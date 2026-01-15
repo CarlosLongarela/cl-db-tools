@@ -255,6 +255,19 @@
 				CLDBTools.ajaxRequest('cl_db_delete_expired_transients', {}, $button);
 			});
 
+			// Delete all transients
+			$(document).on('click', '.cl-delete-all-transients', function(e) {
+				e.preventDefault();
+
+				const $button = $(this);
+
+				if (!confirm(clDbTools.i18n.confirmBackup)) {
+					return;
+				}
+
+				CLDBTools.ajaxRequest('cl_db_delete_all_transients', {}, $button);
+			});
+
 			// Delete orphaned WooCommerce order items
 			$(document).on('click', '.cl-delete-orphaned-wc-order-items', function(e) {
 				e.preventDefault();

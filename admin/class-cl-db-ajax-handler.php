@@ -51,6 +51,7 @@ class CL_DB_Ajax_Handler {
 		add_action( 'wp_ajax_cl_db_delete_orphaned_usermeta', array( $this, 'delete_orphaned_usermeta' ) );
 		add_action( 'wp_ajax_cl_db_delete_wc_sessions', array( $this, 'delete_wc_sessions' ) );
 		add_action( 'wp_ajax_cl_db_delete_expired_transients', array( $this, 'delete_expired_transients' ) );
+		add_action( 'wp_ajax_cl_db_delete_all_transients', array( $this, 'delete_all_transients' ) );
 		add_action( 'wp_ajax_cl_db_delete_orphaned_wc_order_items', array( $this, 'delete_orphaned_wc_order_items' ) );
 		add_action( 'wp_ajax_cl_db_delete_orphaned_wc_order_itemmeta', array( $this, 'delete_orphaned_wc_order_itemmeta' ) );
 		add_action( 'wp_ajax_cl_db_optimize_table', array( $this, 'optimize_table' ) );
@@ -89,14 +90,22 @@ class CL_DB_Ajax_Handler {
 
 		// Map actions to appropriate methods
 		$method_map = array(
-			'get_database_size' => array( 'CL_DB_Analyzer', 'get_database_size' ),
-			'get_tables_info' => array( 'CL_DB_Analyzer', 'get_tables_info' ),
-			'get_non_innodb' => array( 'CL_DB_Analyzer', 'get_non_innodb_tables' ),
-			'get_autoload' => array( 'CL_DB_Analyzer', 'get_autoload_info' ),
-			'get_autosaves' => array( 'CL_DB_Analyzer', 'get_autosave_info' ),
-			'get_orphaned_postmeta' => array( 'CL_DB_Analyzer', 'get_orphaned_postmeta_info' ),
-			'get_orphaned_usermeta' => array( 'CL_DB_Analyzer', 'get_orphaned_usermeta_info' ),
-			'get_expired_transients' => array( 'CL_DB_Analyzer', 'get_expired_transients_info' ),
+			'get_database_size'                => array( 'CL_DB_Analyzer', 'get_database_size' ),
+			'get_tables_info'                  => array( 'CL_DB_Analyzer', 'get_tables_info' ),
+			'get_non_innodb'                   => array( 'CL_DB_Analyzer', 'get_non_innodb_tables' ),
+			'get_autoload'                     => array( 'CL_DB_Analyzer', 'get_autoload_info' ),
+			'get_autosaves'                    => array( 'CL_DB_Analyzer', 'get_autosave_info' ),
+			'get_orphaned_postmeta'            => array( 'CL_DB_Analyzer', 'get_orphaned_postmeta_info' ),
+			'get_orphaned_usermeta'            => array( 'CL_DB_Analyzer', 'get_orphaned_usermeta_info' ),
+			'get_expired_transients'           => array( 'CL_DB_Analyzer', 'get_expired_transients_info' ),
+			'get_all_transients'               => array( 'CL_DB_Analyzer', 'get_all_transients_info' ),
+			'get_orphaned_wc_order_items'      => array( 'CL_DB_Analyzer', 'get_orphaned_wc_order_items_info' ),
+			'get_orphaned_wc_order_itemmeta'   => array( 'CL_DB_Analyzer', 'get_orphaned_wc_order_itemmeta_info' ),
+			// Delete actions show the count of items that would be deleted
+			'delete_expired_transients'        => array( 'CL_DB_Analyzer', 'get_expired_transients_info' ),
+			'delete_all_transients'            => array( 'CL_DB_Analyzer', 'get_all_transients_info' ),
+			'delete_orphaned_wc_order_items'   => array( 'CL_DB_Analyzer', 'get_orphaned_wc_order_items_info' ),
+			'delete_orphaned_wc_order_itemmeta' => array( 'CL_DB_Analyzer', 'get_orphaned_wc_order_itemmeta_info' ),
 		);
 
 		if ( isset( $method_map[ $action ] ) && is_callable( $method_map[ $action ] ) ) {
@@ -403,6 +412,35 @@ class CL_DB_Ajax_Handler {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Failed to delete expired transients.', 'cl-db-tools' ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Delete all transients
+	 *
+	 * @return void
+	 */
+	public function delete_all_transients() {
+		$this->verify_request();
+
+		$result = CL_DB_Optimizer::delete_all_transients();
+
+		if ( false !== $result ) {
+			wp_send_json_success(
+				array(
+					'message' => sprintf(
+						/* translators: %d: number of deleted transients */
+						__( 'Successfully deleted %d transients.', 'cl-db-tools' ),
+						$result
+					),
+				)
+			);
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Failed to delete transients.', 'cl-db-tools' ),
 				)
 			);
 		}

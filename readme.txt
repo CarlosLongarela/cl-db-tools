@@ -4,7 +4,7 @@ Donate link: https://tabernawp.com/donaciones/
 Tags: database, optimization, cleanup, performance, mysql
 Requires at least: 5.8
 Tested up to: 6.7
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,11 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 
 == Changelog ==
 
+= 1.1.0 =
+* Added new "Tools" tab for utility functions
+* Added transients management: view/delete expired and all transients
+* Moved transients section from WooCommerce tab to Tools tab
+
 = 1.0.9 =
 * Added orphaned WooCommerce order items cleanup
 * Added orphaned WooCommerce order item meta cleanup
@@ -135,6 +140,9 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 * SQL query display and copy functionality
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+New Tools tab with transients management. Delete expired or all transients.
 
 = 1.0.9 =
 Added WooCommerce orphaned order items and order item meta cleanup functionality.

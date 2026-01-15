@@ -168,6 +168,7 @@ class CL_DB_Admin {
 				<a href="#tab-autoload" class="nav-tab"><?php esc_html_e( 'Autoload Options', 'cl-db-tools' ); ?></a>
 				<a href="#tab-posts" class="nav-tab"><?php esc_html_e( 'Posts Cleanup', 'cl-db-tools' ); ?></a>
 				<a href="#tab-orphaned" class="nav-tab"><?php esc_html_e( 'Orphaned Data', 'cl-db-tools' ); ?></a>
+				<a href="#tab-tools" class="nav-tab"><?php esc_html_e( 'Tools', 'cl-db-tools' ); ?></a>
 				<?php if ( CL_DB_Analyzer::is_woocommerce_active() ) : ?>
 					<a href="#tab-woocommerce" class="nav-tab"><?php esc_html_e( 'WooCommerce', 'cl-db-tools' ); ?></a>
 				<?php endif; ?>
@@ -191,6 +192,10 @@ class CL_DB_Admin {
 
 			<div id="tab-orphaned" class="tab-content">
 				<?php $this->render_orphaned_tab(); ?>
+			</div>
+
+			<div id="tab-tools" class="tab-content">
+				<?php $this->render_tools_tab(); ?>
 			</div>
 
 			<?php if ( CL_DB_Analyzer::is_woocommerce_active() ) : ?>
@@ -481,7 +486,7 @@ class CL_DB_Admin {
 							<td><code><?php echo esc_html( $option['option_name'] ); ?></code></td>
 							<td><?php echo esc_html( CL_DB_Analyzer::format_bytes( $option['size'] ) ); ?></td>
 							<td>
-								<button class="button button-small cl-update-autoload" data-option="<?php echo esc_attr( $option['option_name'] ); ?>" data-value="no" data-requires-backup="true">
+								<button class="button button-small cl-update-autoload" data-option="<?php echo esc_attr( $option['option_name'] ); ?>" data-value="off" data-requires-backup="true">
 									<?php esc_html_e( 'Disable Autoload', 'cl-db-tools' ); ?>
 								</button>
 								<button class="button button-small button-link-delete cl-delete-option" data-option="<?php echo esc_attr( $option['option_name'] ); ?>" data-requires-backup="true">
@@ -614,7 +619,6 @@ class CL_DB_Admin {
 	 */
 	private function render_woocommerce_tab() {
 		$wc_sessions = CL_DB_Analyzer::get_wc_sessions_info();
-		$expired_transients = CL_DB_Analyzer::get_expired_transients_info();
 		$orphaned_wc_order_items = CL_DB_Analyzer::get_orphaned_wc_order_items_info();
 		$orphaned_wc_order_itemmeta = CL_DB_Analyzer::get_orphaned_wc_order_itemmeta_info();
 
@@ -716,18 +720,36 @@ class CL_DB_Admin {
 				<p><?php esc_html_e( 'WooCommerce sessions table not found.', 'cl-db-tools' ); ?></p>
 			<?php endif; ?>
 		</div>
+		<?php
+	}
 
+	/**
+	 * Render Tools tab
+	 */
+	private function render_tools_tab() {
+		$expired_transients = CL_DB_Analyzer::get_expired_transients_info();
+		$all_transients = CL_DB_Analyzer::get_all_transients_info();
+
+		?>
 		<div class="cl-db-section">
-			<h2><?php esc_html_e( 'Expired Transients', 'cl-db-tools' ); ?></h2>
+			<h2><?php esc_html_e( 'Transients Management', 'cl-db-tools' ); ?></h2>
 
 			<div class="cl-db-stats">
+				<div class="cl-db-stat-box">
+					<h3><?php esc_html_e( 'Total Transients', 'cl-db-tools' ); ?></h3>
+					<p class="cl-db-stat-value"><?php echo esc_html( number_format_i18n( $all_transients['count'] ) ); ?></p>
+				</div>
+
 				<div class="cl-db-stat-box">
 					<h3><?php esc_html_e( 'Expired Transients', 'cl-db-tools' ); ?></h3>
 					<p class="cl-db-stat-value"><?php echo esc_html( number_format_i18n( $expired_transients['count'] ) ); ?></p>
 				</div>
 			</div>
 
+			<h3><?php esc_html_e( 'Expired Transients', 'cl-db-tools' ); ?></h3>
+
 			<div class="cl-db-query-display">
+				<h4><?php esc_html_e( 'Find Expired Transients Query', 'cl-db-tools' ); ?></h4>
 				<?php $this->render_query_box( CL_DB_Query_Builder::get_expired_transients_query(), 'get_expired_transients' ); ?>
 			</div>
 
@@ -739,7 +761,28 @@ class CL_DB_Admin {
 				</p>
 
 				<div class="cl-db-query-display">
+					<h4><?php esc_html_e( 'Delete Expired Transients Query', 'cl-db-tools' ); ?></h4>
 					<?php $this->render_query_box( CL_DB_Query_Builder::get_delete_expired_transients_query(), 'delete_expired_transients' ); ?>
+				</div>
+			<?php endif; ?>
+
+			<h3><?php esc_html_e( 'All Transients', 'cl-db-tools' ); ?></h3>
+
+			<div class="cl-db-query-display">
+				<h4><?php esc_html_e( 'Find All Transients Query', 'cl-db-tools' ); ?></h4>
+				<?php $this->render_query_box( CL_DB_Query_Builder::get_all_transients_query(), 'get_all_transients' ); ?>
+			</div>
+
+			<?php if ( $all_transients['count'] > 0 ) : ?>
+				<p>
+					<button class="button button-primary cl-delete-all-transients" data-requires-backup="true">
+						<?php esc_html_e( 'Delete All Transients', 'cl-db-tools' ); ?>
+					</button>
+				</p>
+
+				<div class="cl-db-query-display">
+					<h4><?php esc_html_e( 'Delete All Transients Query', 'cl-db-tools' ); ?></h4>
+					<?php $this->render_query_box( CL_DB_Query_Builder::get_delete_all_transients_query(), 'delete_all_transients' ); ?>
 				</div>
 			<?php endif; ?>
 		</div>

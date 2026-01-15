@@ -77,7 +77,7 @@ class CL_DB_Optimizer {
 	 * Update autoload value for an option
 	 *
 	 * @param string $option_name Option name.
-	 * @param string $autoload_value Autoload value ('yes' or 'no').
+	 * @param string $autoload_value Autoload value ('yes', 'on', 'no', or 'off').
 	 * @return bool
 	 */
 	public static function update_autoload( $option_name, $autoload_value ) {
@@ -216,6 +216,26 @@ class CL_DB_Optimizer {
 		}
 
 		CL_DB_Security::log( "Successfully deleted expired transients", 'notice' );
+		return $result;
+	}
+
+	/**
+	 * Delete all transients
+	 *
+	 * @return int|false Number of deleted items or false on error
+	 */
+	public static function delete_all_transients() {
+		global $wpdb;
+
+		$query = CL_DB_Query_Builder::get_delete_all_transients_query();
+		$result = $wpdb->query( $query );
+
+		if ( false === $result ) {
+			CL_DB_Security::log( 'Error deleting all transients: ' . $wpdb->last_error, 'error' );
+			return false;
+		}
+
+		CL_DB_Security::log( "Successfully deleted all transients", 'notice' );
 		return $result;
 	}
 

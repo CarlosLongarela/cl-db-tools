@@ -263,6 +263,26 @@ class CL_DB_Analyzer {
 	}
 
 	/**
+	 * Get all transients information
+	 *
+	 * @return array
+	 */
+	public static function get_all_transients_info() {
+		global $wpdb;
+
+		$count_query = CL_DB_Query_Builder::get_all_transients_count_query();
+		$count = $wpdb->get_var( $count_query );
+
+		$items_query = CL_DB_Query_Builder::get_all_transients_query();
+		$items = $wpdb->get_results( $items_query, ARRAY_A );
+
+		return array(
+			'count' => $count,
+			'items' => $items,
+		);
+	}
+
+	/**
 	 * Get orphaned WooCommerce order items information
 	 *
 	 * @return array|false
