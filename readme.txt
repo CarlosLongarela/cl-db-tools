@@ -70,6 +70,14 @@ No. Database changes cannot be undone. Always make a backup before performing op
 
 InnoDB offers better performance, crash recovery, and supports transactions. It's the recommended engine for WordPress.
 
+= How can I change the cache duration? =
+
+By default, database information is cached for 15 minutes to improve performance. You can customize this by adding the following constant to your wp-config.php file:
+
+`define( 'CL_DB_TOOLS_CACHE_EXPIRATION', 30 * MINUTE_IN_SECONDS );`
+
+Replace 30 with the number of minutes you want. Set to 0 to disable caching (not recommended for production sites).
+
 == Screenshots ==
 
 1. Database Overview - View database statistics and connection information

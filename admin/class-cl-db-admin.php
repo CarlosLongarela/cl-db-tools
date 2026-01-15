@@ -168,10 +168,10 @@ class CL_DB_Admin {
 				<a href="#tab-autoload" class="nav-tab"><?php esc_html_e( 'Autoload Options', 'cl-db-tools' ); ?></a>
 				<a href="#tab-posts" class="nav-tab"><?php esc_html_e( 'Posts Cleanup', 'cl-db-tools' ); ?></a>
 				<a href="#tab-orphaned" class="nav-tab"><?php esc_html_e( 'Orphaned Data', 'cl-db-tools' ); ?></a>
-				<a href="#tab-tools" class="nav-tab"><?php esc_html_e( 'Tools', 'cl-db-tools' ); ?></a>
 				<?php if ( CL_DB_Analyzer::is_woocommerce_active() ) : ?>
 					<a href="#tab-woocommerce" class="nav-tab"><?php esc_html_e( 'WooCommerce', 'cl-db-tools' ); ?></a>
 				<?php endif; ?>
+				<a href="#tab-tools" class="nav-tab"><?php esc_html_e( 'Tools', 'cl-db-tools' ); ?></a>
 			</div>
 
 			<div id="tab-overview" class="tab-content active">
@@ -194,15 +194,15 @@ class CL_DB_Admin {
 				<?php $this->render_orphaned_tab(); ?>
 			</div>
 
-			<div id="tab-tools" class="tab-content">
-				<?php $this->render_tools_tab(); ?>
-			</div>
-
 			<?php if ( CL_DB_Analyzer::is_woocommerce_active() ) : ?>
 				<div id="tab-woocommerce" class="tab-content">
 					<?php $this->render_woocommerce_tab(); ?>
 				</div>
 			<?php endif; ?>
+
+			<div id="tab-tools" class="tab-content">
+				<?php $this->render_tools_tab(); ?>
+			</div>
 		</div>
 		<?php
 	}

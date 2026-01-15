@@ -26,6 +26,12 @@ define( 'CL_DB_TOOLS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CL_DB_TOOLS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_DB_TOOLS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+// Cache expiration time in seconds (default: 15 minutes)
+// Can be customized in wp-config.php: define( 'CL_DB_TOOLS_CACHE_EXPIRATION', 30 * MINUTE_IN_SECONDS );
+if ( ! defined( 'CL_DB_TOOLS_CACHE_EXPIRATION' ) ) {
+	define( 'CL_DB_TOOLS_CACHE_EXPIRATION', 15 * MINUTE_IN_SECONDS );
+}
+
 // Load main plugin class
 require_once CL_DB_TOOLS_PLUGIN_DIR . 'includes/class-cl-db-tools.php';
 

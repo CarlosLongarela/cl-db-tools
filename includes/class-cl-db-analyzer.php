@@ -93,8 +93,8 @@ class CL_DB_Analyzer {
 			return false;
 		}
 
-		// Cache for 5 minutes
-		set_transient( $cache_key, $results, 5 * MINUTE_IN_SECONDS );
+		// Cache using configured expiration time
+		set_transient( $cache_key, $results, CL_DB_TOOLS_CACHE_EXPIRATION );
 
 		return $results;
 	}
@@ -125,8 +125,8 @@ class CL_DB_Analyzer {
 			return false;
 		}
 
-		// Cache for 5 minutes
-		set_transient( $cache_key, $result, 5 * MINUTE_IN_SECONDS );
+		// Cache using configured expiration time
+		set_transient( $cache_key, $result, CL_DB_TOOLS_CACHE_EXPIRATION );
 
 		return $result;
 	}
@@ -179,8 +179,8 @@ class CL_DB_Analyzer {
 			'options' => $options,
 		);
 
-		// Cache for 5 minutes
-		set_transient( $cache_key, $result, 5 * MINUTE_IN_SECONDS );
+		// Cache using configured expiration time
+		set_transient( $cache_key, $result, CL_DB_TOOLS_CACHE_EXPIRATION );
 
 		return $result;
 	}
