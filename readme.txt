@@ -4,7 +4,7 @@ Donate link: https://tabernawp.com/donaciones/
 Tags: database, optimization, cleanup, performance, mysql
 Requires at least: 5.8
 Tested up to: 6.7
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,11 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 
 == Changelog ==
 
+= 1.0.6 =
+* Added "Created" column to tables list showing table creation date
+* Added tooltip explaining that this date may change after OPTIMIZE or ALTER operations
+* UI improvements with new tooltip component
+
 = 1.0.5 =
 * Added readme.txt for WordPress.org repository submission
 * Updated changelog documentation
@@ -115,6 +120,9 @@ InnoDB offers better performance, crash recovery, and supports transactions. It'
 * SQL query display and copy functionality
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+Added table creation date column with informative tooltip. UI improvements.
 
 = 1.0.5 =
 Added readme.txt for WordPress.org submission. No functional changes.

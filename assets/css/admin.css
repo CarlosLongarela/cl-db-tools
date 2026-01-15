@@ -347,6 +347,75 @@
 	}
 }
 
+/* Tooltip */
+.cl-db-tooltip {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	margin-inline-start: 4px;
+	cursor: help;
+
+	& .dashicons {
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+		color: var(--cl-text-secondary);
+		vertical-align: middle;
+	}
+
+	&::after {
+		content: attr(aria-label);
+		position: absolute;
+		inset-block-end: calc(100% + 8px);
+		inset-inline-start: 50%;
+		transform: translateX(-50%);
+		padding: var(--cl-spacing-sm) var(--cl-spacing-md);
+		background: var(--cl-bg-dark);
+		color: var(--cl-text-light);
+		font-size: var(--cl-font-size-sm);
+		font-weight: normal;
+		white-space: nowrap;
+		border-radius: var(--cl-radius-md);
+		box-shadow: var(--cl-shadow-medium);
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
+		z-index: 1000;
+		max-width: 300px;
+		white-space: normal;
+		text-align: center;
+		line-height: 1.4;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset-block-end: calc(100% + 2px);
+		inset-inline-start: 50%;
+		transform: translateX(-50%);
+		border: 6px solid transparent;
+		border-block-start-color: var(--cl-bg-dark);
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.2s ease, visibility 0.2s ease;
+		z-index: 1001;
+	}
+
+	&:hover::after,
+	&:focus::after,
+	&:hover::before,
+	&:focus::before {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+/* N/A text style */
+.cl-db-na {
+	color: var(--cl-text-secondary);
+	font-style: italic;
+}
+
 /* Buttons */
 .cl-db-tools .button {
 	display: inline-flex;

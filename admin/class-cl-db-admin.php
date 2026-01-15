@@ -115,7 +115,7 @@ class CL_DB_Admin {
 			'author'      => 'Carlos Longarela',
 			'author_uri'  => 'https://tabernawp.com/',
 			'description' => __( 'Advanced database administration and optimization tools for WordPress', 'cl-db-tools' ),
-			'updated'     => '2025-01-15',
+			'updated'     => '2026-01-15',
 		);
 		?>
 		<div class="wrap cl-db-tools">
@@ -350,6 +350,12 @@ class CL_DB_Admin {
 						<th><?php esc_html_e( 'Data Size', 'cl-db-tools' ); ?></th>
 						<th><?php esc_html_e( 'Index Size', 'cl-db-tools' ); ?></th>
 						<th><?php esc_html_e( 'Total Size', 'cl-db-tools' ); ?></th>
+						<th>
+							<?php esc_html_e( 'Created', 'cl-db-tools' ); ?>
+							<span class="cl-db-tooltip" aria-label="<?php esc_attr_e( 'This date may change after OPTIMIZE TABLE or ALTER TABLE operations', 'cl-db-tools' ); ?>">
+								<span class="dashicons dashicons-info-outline"></span>
+							</span>
+						</th>
 						<th><?php esc_html_e( 'Actions', 'cl-db-tools' ); ?></th>
 					</tr>
 				</thead>
@@ -362,6 +368,15 @@ class CL_DB_Admin {
 							<td><?php echo esc_html( CL_DB_Analyzer::format_bytes( $table['data_length'] ) ); ?></td>
 							<td><?php echo esc_html( CL_DB_Analyzer::format_bytes( $table['index_length'] ) ); ?></td>
 							<td><?php echo esc_html( CL_DB_Analyzer::format_bytes( $table['data_length'] + $table['index_length'] ) ); ?></td>
+							<td>
+								<?php
+								if ( ! empty( $table['create_time'] ) ) {
+									echo esc_html( date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $table['create_time'] ) ) );
+								} else {
+									echo '<span class="cl-db-na">' . esc_html__( 'N/A', 'cl-db-tools' ) . '</span>';
+								}
+								?>
+							</td>
 							<td>
 								<button class="button button-small cl-optimize-table" data-table="<?php echo esc_attr( $table['table_name'] ); ?>">
 									<?php esc_html_e( 'Optimize', 'cl-db-tools' ); ?>
