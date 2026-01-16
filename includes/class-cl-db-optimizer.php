@@ -55,7 +55,7 @@ class CL_DB_Optimizer {
 		$non_innodb_tables = CL_DB_Analyzer::get_non_innodb_tables();
 		$results = array(
 			'success' => array(),
-			'failed' => array(),
+			'failed'  => array(),
 		);
 
 		if ( empty( $non_innodb_tables ) ) {
@@ -147,7 +147,7 @@ class CL_DB_Optimizer {
 	public static function delete_autosaves( $keep_last = 0 ) {
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_delete_autosaves_query( $keep_last );
+		$query  = CL_DB_Query_Builder::get_delete_autosaves_query( $keep_last );
 		$result = $wpdb->query( $query );
 
 		if ( false === $result ) {
@@ -167,7 +167,7 @@ class CL_DB_Optimizer {
 	public static function delete_orphaned_postmeta() {
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_delete_orphaned_postmeta_query();
+		$query  = CL_DB_Query_Builder::get_delete_orphaned_postmeta_query();
 		$result = $wpdb->query( $query );
 
 		if ( false === $result ) {
@@ -187,7 +187,7 @@ class CL_DB_Optimizer {
 	public static function delete_orphaned_usermeta() {
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_delete_orphaned_usermeta_query();
+		$query  = CL_DB_Query_Builder::get_delete_orphaned_usermeta_query();
 		$result = $wpdb->query( $query );
 
 		if ( false === $result ) {
@@ -207,7 +207,7 @@ class CL_DB_Optimizer {
 	public static function delete_expired_transients() {
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_delete_expired_transients_query();
+		$query  = CL_DB_Query_Builder::get_delete_expired_transients_query();
 		$result = $wpdb->query( $query );
 
 		if ( false === $result ) {
@@ -227,7 +227,7 @@ class CL_DB_Optimizer {
 	public static function delete_all_transients() {
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_delete_all_transients_query();
+		$query  = CL_DB_Query_Builder::get_delete_all_transients_query();
 		$result = $wpdb->query( $query );
 
 		if ( false === $result ) {
@@ -251,7 +251,7 @@ class CL_DB_Optimizer {
 			return false;
 		}
 
-		$query = CL_DB_Query_Builder::get_delete_expired_wc_sessions_query();
+		$query  = CL_DB_Query_Builder::get_delete_expired_wc_sessions_query();
 
 		if ( false === $query ) {
 			return false;
@@ -364,7 +364,7 @@ class CL_DB_Optimizer {
 		$tables = CL_DB_Analyzer::get_tables_info();
 		$results = array(
 			'success' => array(),
-			'failed' => array(),
+			'failed'  => array(),
 		);
 
 		if ( empty( $tables ) ) {

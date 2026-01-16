@@ -85,7 +85,7 @@ class CL_DB_Analyzer {
 
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_tables_info_query();
+		$query   = CL_DB_Query_Builder::get_tables_info_query();
 		$results = $wpdb->get_results( $query, ARRAY_A );
 
 		if ( $wpdb->last_error ) {
@@ -117,7 +117,7 @@ class CL_DB_Analyzer {
 
 		global $wpdb;
 
-		$query = CL_DB_Query_Builder::get_database_size_query();
+		$query  = CL_DB_Query_Builder::get_database_size_query();
 		$result = $wpdb->get_row( $query );
 
 		if ( $wpdb->last_error ) {
@@ -171,10 +171,10 @@ class CL_DB_Analyzer {
 		$limit = self::get_autoload_limit();
 
 		$total_query = CL_DB_Query_Builder::get_autoload_total_query();
-		$total = $wpdb->get_row( $total_query );
+		$total       = $wpdb->get_row( $total_query );
 
 		$options_query = CL_DB_Query_Builder::get_autoload_options_query( $limit );
-		$options = $wpdb->get_results( $options_query, ARRAY_A );
+		$options       = $wpdb->get_results( $options_query, ARRAY_A );
 
 		$result = array(
 			'total'   => $total,
@@ -197,10 +197,10 @@ class CL_DB_Analyzer {
 		global $wpdb;
 
 		$count_query = CL_DB_Query_Builder::get_autosave_count_query();
-		$count = $wpdb->get_var( $count_query );
+		$count       = $wpdb->get_var( $count_query );
 
 		$posts_query = CL_DB_Query_Builder::get_autosave_posts_query();
-		$posts = $wpdb->get_results( $posts_query, ARRAY_A );
+		$posts       = $wpdb->get_results( $posts_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -217,10 +217,10 @@ class CL_DB_Analyzer {
 		global $wpdb;
 
 		$count_query = CL_DB_Query_Builder::get_orphaned_postmeta_count_query();
-		$count = $wpdb->get_var( $count_query );
+		$count       = $wpdb->get_var( $count_query );
 
 		$items_query = CL_DB_Query_Builder::get_orphaned_postmeta_query();
-		$items = $wpdb->get_results( $items_query, ARRAY_A );
+		$items       = $wpdb->get_results( $items_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -237,10 +237,10 @@ class CL_DB_Analyzer {
 		global $wpdb;
 
 		$count_query = CL_DB_Query_Builder::get_orphaned_usermeta_count_query();
-		$count = $wpdb->get_var( $count_query );
+		$count       = $wpdb->get_var( $count_query );
 
 		$items_query = CL_DB_Query_Builder::get_orphaned_usermeta_query();
-		$items = $wpdb->get_results( $items_query, ARRAY_A );
+		$items       = $wpdb->get_results( $items_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -274,10 +274,10 @@ class CL_DB_Analyzer {
 		global $wpdb;
 
 		$count_query = CL_DB_Query_Builder::get_all_transients_count_query();
-		$count = $wpdb->get_var( $count_query );
+		$count       = $wpdb->get_var( $count_query );
 
 		$items_query = CL_DB_Query_Builder::get_all_transients_query();
-		$items = $wpdb->get_results( $items_query, ARRAY_A );
+		$items       = $wpdb->get_results( $items_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -302,7 +302,7 @@ class CL_DB_Analyzer {
 		$count = $wpdb->get_var( $count_query );
 
 		$items_query = CL_DB_Query_Builder::get_orphaned_wc_order_items_query();
-		$items = $wpdb->get_results( $items_query, ARRAY_A );
+		$items       = $wpdb->get_results( $items_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -327,7 +327,7 @@ class CL_DB_Analyzer {
 		$count = $wpdb->get_var( $count_query );
 
 		$items_query = CL_DB_Query_Builder::get_orphaned_wc_order_itemmeta_query();
-		$items = $wpdb->get_results( $items_query, ARRAY_A );
+		$items       = $wpdb->get_results( $items_query, ARRAY_A );
 
 		return array(
 			'count' => $count,
@@ -352,7 +352,7 @@ class CL_DB_Analyzer {
 		$sessions = $wpdb->get_results( $query, ARRAY_A );
 
 		$expired_count = 0;
-		$current_time = time();
+		$current_time  = time();
 
 		foreach ( $sessions as $session ) {
 			if ( $session['session_expiry'] < $current_time ) {
@@ -361,8 +361,8 @@ class CL_DB_Analyzer {
 		}
 
 		return array(
-			'total' => count( $sessions ),
-			'expired' => $expired_count,
+			'total'    => count( $sessions ),
+			'expired'  => $expired_count,
 			'sessions' => $sessions,
 		);
 	}
@@ -378,8 +378,8 @@ class CL_DB_Analyzer {
 		$units = array( 'B', 'KB', 'MB', 'GB', 'TB' );
 
 		$bytes = max( $bytes, 0 );
-		$pow = floor( ( $bytes ? log( $bytes ) : 0 ) / log( 1024 ) );
-		$pow = min( $pow, count( $units ) - 1 );
+		$pow   = floor( ( $bytes ? log( $bytes ) : 0 ) / log( 1024 ) );
+		$pow   = min( $pow, count( $units ) - 1 );
 
 		$bytes /= pow( 1024, $pow );
 

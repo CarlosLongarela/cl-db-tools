@@ -491,7 +491,7 @@ class CL_DB_Query_Builder {
 		global $wpdb;
 
 		// Check if WooCommerce sessions table exists
-		$table_name = $wpdb->prefix . 'woocommerce_sessions';
+		$table_name   = $wpdb->prefix . 'woocommerce_sessions';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -516,7 +516,7 @@ class CL_DB_Query_Builder {
 	public static function get_delete_expired_wc_sessions_query() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_sessions';
+		$table_name   = $wpdb->prefix . 'woocommerce_sessions';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -538,8 +538,8 @@ class CL_DB_Query_Builder {
 	public static function get_orphaned_wc_order_itemmeta_query( $limit = 100 ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
-		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table  = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -575,8 +575,8 @@ class CL_DB_Query_Builder {
 	public static function get_orphaned_wc_order_itemmeta_count_query() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
-		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table  = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -598,8 +598,8 @@ class CL_DB_Query_Builder {
 	public static function get_delete_orphaned_wc_order_itemmeta_query() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_itemmeta';
-		$items_table = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$items_table  = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -621,7 +621,7 @@ class CL_DB_Query_Builder {
 	public static function get_orphaned_wc_order_items_query( $limit = 100 ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -657,7 +657,7 @@ class CL_DB_Query_Builder {
 	public static function get_orphaned_wc_order_items_count_query() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
@@ -679,7 +679,7 @@ class CL_DB_Query_Builder {
 	public static function get_delete_orphaned_wc_order_items_query() {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'woocommerce_order_items';
+		$table_name   = $wpdb->prefix . 'woocommerce_order_items';
 		$table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) );
 
 		if ( ! $table_exists ) {
