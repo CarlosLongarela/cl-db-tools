@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CL Database Tools\n"
-"POT-Creation-Date: 2026-01-16 01:46+0100\n"
-"PO-Revision-Date: 2026-01-16 02:18+0100\n"
+"POT-Creation-Date: 2026-01-17 00:29+0100\n"
+"PO-Revision-Date: 2026-01-17 00:30+0100\n"
 "Last-Translator: Carlos Longarela <carlos@longarela.eu>\n"
 "Language-Team: Carlos Longarela <carlos@longarela.eu>\n"
 "Language: es_ES\n"
@@ -247,7 +247,7 @@ msgstr ""
 "Esta fecha puede cambiar tras operaciones de OPTIMIZE TABLE o ALTER TABLE"
 
 #: admin/class-cl-db-admin.php:364 admin/class-cl-db-admin.php:418
-#: admin/class-cl-db-admin.php:480
+#: admin/class-cl-db-admin.php:490
 msgid "Actions"
 msgstr "Acciones"
 
@@ -291,199 +291,205 @@ msgstr "Tamaño total de autocarga"
 msgid "Autoload Options Query"
 msgstr "Consulta de opciones de autocarga"
 
-#: admin/class-cl-db-admin.php:478
+#. translators: %s: number of options displayed
+#: admin/class-cl-db-admin.php:479
+#, php-format
+msgid "Showing %s largest autoload options by size."
+msgstr "Mostrando las %s mayores opciones de autocarga ordenadas por tamaño."
+
+#: admin/class-cl-db-admin.php:488
 msgid "Option Name"
 msgstr "Nombre de la opción"
 
-#: admin/class-cl-db-admin.php:479
+#: admin/class-cl-db-admin.php:489
 msgid "Size"
 msgstr "Tamaño"
 
-#: admin/class-cl-db-admin.php:490
+#: admin/class-cl-db-admin.php:500
 msgid "Disable Autoload"
 msgstr "Desactivar la carga automática"
 
-#: admin/class-cl-db-admin.php:493
+#: admin/class-cl-db-admin.php:503
 msgid "Delete"
 msgstr "Borrar"
 
-#: admin/class-cl-db-admin.php:512
+#: admin/class-cl-db-admin.php:522
 msgid "Autosaves and Revisions Cleanup"
 msgstr "Guardados automáticos y limpieza de revisiones"
 
-#: admin/class-cl-db-admin.php:516
+#: admin/class-cl-db-admin.php:526
 msgid "Total Autosaves"
 msgstr "Total de guardados automáticos"
 
-#: admin/class-cl-db-admin.php:522
+#: admin/class-cl-db-admin.php:532
 msgid "Autosaves Query"
 msgstr "Consulta de guardados automáticos"
 
-#: admin/class-cl-db-admin.php:527 admin/class-cl-db-admin.php:537
+#: admin/class-cl-db-admin.php:537 admin/class-cl-db-admin.php:547
 msgid "Delete Autosaves"
 msgstr "Eliminar guardados automáticos"
 
-#: admin/class-cl-db-admin.php:530
+#: admin/class-cl-db-admin.php:540
 msgid "Keep last:"
 msgstr "Mantén los últimos:"
 
-#: admin/class-cl-db-admin.php:532
+#: admin/class-cl-db-admin.php:542
 msgid "autosaves (0 = delete all)"
 msgstr "guardados automáticos (0 = eliminar todo)"
 
-#: admin/class-cl-db-admin.php:558
+#: admin/class-cl-db-admin.php:568
 msgid "Orphaned Postmeta"
 msgstr "Postmeta huérfano"
 
-#: admin/class-cl-db-admin.php:562
+#: admin/class-cl-db-admin.php:572
 msgid "Orphaned Postmeta Entries"
 msgstr "Entradas postmeta huérfanas"
 
-#: admin/class-cl-db-admin.php:568
+#: admin/class-cl-db-admin.php:578
 msgid "Find Orphaned Postmeta Query"
 msgstr "Consulta para buscar postmeta huérfanos"
 
-#: admin/class-cl-db-admin.php:575
+#: admin/class-cl-db-admin.php:585
 msgid "Delete Orphaned Postmeta"
 msgstr "Eliminar postmeta huérfanos"
 
-#: admin/class-cl-db-admin.php:580
+#: admin/class-cl-db-admin.php:590
 msgid "Delete Orphaned Postmeta Query"
 msgstr "Consulta para eliminar postmeta huérfanos"
 
-#: admin/class-cl-db-admin.php:587
+#: admin/class-cl-db-admin.php:597
 msgid "Orphaned Usermeta"
 msgstr "Usermeta huérfano"
 
-#: admin/class-cl-db-admin.php:591
+#: admin/class-cl-db-admin.php:601
 msgid "Orphaned Usermeta Entries"
 msgstr "Entradas huérfanas de usermeta"
 
-#: admin/class-cl-db-admin.php:597
+#: admin/class-cl-db-admin.php:607
 msgid "Find Orphaned Usermeta Query"
 msgstr "Consulta para buscar metadatos de usuario huérfanos"
 
-#: admin/class-cl-db-admin.php:604
+#: admin/class-cl-db-admin.php:614
 msgid "Delete Orphaned Usermeta"
 msgstr "Eliminar usermeta huérfano"
 
-#: admin/class-cl-db-admin.php:609
+#: admin/class-cl-db-admin.php:619
 msgid "Delete Orphaned Usermeta Query"
 msgstr "Consulta para borrar metadatos huérfanos de usuario"
 
-#: admin/class-cl-db-admin.php:627
+#: admin/class-cl-db-admin.php:637
 msgid "Orphaned WooCommerce Order Items"
 msgstr "Artículos de pedido huérfanos de WooCommerce"
 
-#: admin/class-cl-db-admin.php:632
+#: admin/class-cl-db-admin.php:642
 msgid "Orphaned Order Items"
 msgstr "Artículos de pedidos huérfanos"
 
-#: admin/class-cl-db-admin.php:638
+#: admin/class-cl-db-admin.php:648
 msgid "Find Orphaned Order Items Query"
 msgstr "Consulta para buscar artículos de pedido huérfanos"
 
-#: admin/class-cl-db-admin.php:645
+#: admin/class-cl-db-admin.php:655
 msgid "Delete Orphaned Order Items"
 msgstr "Eliminar artículos de pedido huérfanos"
 
-#: admin/class-cl-db-admin.php:650
+#: admin/class-cl-db-admin.php:660
 msgid "Delete Orphaned Order Items Query"
 msgstr "Consulta para eliminar artículos de pedido huérfanos"
 
-#: admin/class-cl-db-admin.php:655
+#: admin/class-cl-db-admin.php:665
 msgid "WooCommerce order items table not found."
 msgstr "Tabla de pedidos de WooCommerce no encontrada."
 
-#: admin/class-cl-db-admin.php:660
+#: admin/class-cl-db-admin.php:670
 msgid "Orphaned WooCommerce Order Item Meta"
 msgstr "Metadatos huérfanos de artículos de pedido de WooCommerce"
 
-#: admin/class-cl-db-admin.php:665
+#: admin/class-cl-db-admin.php:675
 msgid "Orphaned Order Item Meta"
 msgstr "Metadatos huérfanos de los artículos del pedido"
 
-#: admin/class-cl-db-admin.php:671
+#: admin/class-cl-db-admin.php:681
 msgid "Find Orphaned Order Item Meta Query"
 msgstr "Consulta para buscar metadatos huérfanos de artículos del pedido"
 
-#: admin/class-cl-db-admin.php:678
+#: admin/class-cl-db-admin.php:688
 msgid "Delete Orphaned Order Item Meta"
 msgstr "Eliminar meta de artículo de pedido huérfano"
 
-#: admin/class-cl-db-admin.php:683
+#: admin/class-cl-db-admin.php:693
 msgid "Delete Orphaned Order Item Meta Query"
 msgstr "Eliminar consulta meta de artículos de pedido huérfanos"
 
-#: admin/class-cl-db-admin.php:688
+#: admin/class-cl-db-admin.php:698
 msgid "WooCommerce order item meta table not found."
 msgstr "Tabla meta de artículos de pedidos de WooCommerce no encontrada."
 
-#: admin/class-cl-db-admin.php:693
+#: admin/class-cl-db-admin.php:703
 msgid "WooCommerce Sessions"
 msgstr "Sesiones de WooCommerce"
 
-#: admin/class-cl-db-admin.php:698
+#: admin/class-cl-db-admin.php:708
 msgid "Total Sessions"
 msgstr "Total de sesiones"
 
-#: admin/class-cl-db-admin.php:703
+#: admin/class-cl-db-admin.php:713
 msgid "Expired Sessions"
 msgstr "Sesiones caducadas"
 
-#: admin/class-cl-db-admin.php:711
+#: admin/class-cl-db-admin.php:721
 msgid "Delete Expired Sessions"
 msgstr "Eliminar sesiones caducadas"
 
-#: admin/class-cl-db-admin.php:720
+#: admin/class-cl-db-admin.php:730
 msgid "WooCommerce sessions table not found."
 msgstr "Tabla de sesiones de WooCommerce no encontrada."
 
-#: admin/class-cl-db-admin.php:735
+#: admin/class-cl-db-admin.php:745
 msgid "Transients Management"
 msgstr "Gestión de transients"
 
-#: admin/class-cl-db-admin.php:739
+#: admin/class-cl-db-admin.php:749
 msgid "Total Transients"
 msgstr "Transients totales"
 
-#: admin/class-cl-db-admin.php:744 admin/class-cl-db-admin.php:749
+#: admin/class-cl-db-admin.php:754 admin/class-cl-db-admin.php:759
 msgid "Expired Transients"
 msgstr "Transients caducados"
 
-#: admin/class-cl-db-admin.php:752
+#: admin/class-cl-db-admin.php:762
 msgid "Find Expired Transients Query"
 msgstr "Consulta para buscar transients caducados"
 
-#: admin/class-cl-db-admin.php:759
+#: admin/class-cl-db-admin.php:769
 msgid "Delete Expired Transients"
 msgstr "Borrar transients caducados"
 
-#: admin/class-cl-db-admin.php:764
+#: admin/class-cl-db-admin.php:774
 msgid "Delete Expired Transients Query"
 msgstr "Consulta para eliminar transients caducados"
 
-#: admin/class-cl-db-admin.php:769
+#: admin/class-cl-db-admin.php:779
 msgid "All Transients"
 msgstr "Todos los transients"
 
-#: admin/class-cl-db-admin.php:772
+#: admin/class-cl-db-admin.php:782
 msgid "Find All Transients Query"
 msgstr "Consulta para buscar todos los transients"
 
-#: admin/class-cl-db-admin.php:779
+#: admin/class-cl-db-admin.php:789
 msgid "Delete All Transients"
 msgstr "Eliminar todos los transients"
 
-#: admin/class-cl-db-admin.php:784
+#: admin/class-cl-db-admin.php:794
 msgid "Delete All Transients Query"
 msgstr "Consulta para eliminar todos los transients"
 
-#: admin/class-cl-db-admin.php:816
+#: admin/class-cl-db-admin.php:826
 msgid "Copy Query"
 msgstr "Copiar consulta"
 
-#: admin/class-cl-db-admin.php:819
+#: admin/class-cl-db-admin.php:829
 msgid "Execute Query"
 msgstr "Ejecutar consulta"
 
