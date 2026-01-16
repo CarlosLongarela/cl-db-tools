@@ -168,15 +168,18 @@ class CL_DB_Analyzer {
 
 		global $wpdb;
 
+		$limit = self::get_autoload_limit();
+
 		$total_query = CL_DB_Query_Builder::get_autoload_total_query();
 		$total = $wpdb->get_row( $total_query );
 
-		$options_query = CL_DB_Query_Builder::get_autoload_options_query();
+		$options_query = CL_DB_Query_Builder::get_autoload_options_query( $limit );
 		$options = $wpdb->get_results( $options_query, ARRAY_A );
 
 		$result = array(
-			'total' => $total,
+			'total'   => $total,
 			'options' => $options,
+			'limit'   => $limit,
 		);
 
 		// Cache using configured expiration time
@@ -380,7 +383,7 @@ class CL_DB_Analyzer {
 
 		$bytes /= pow( 1024, $pow );
 
-		return round( $bytes, $precision ) . ' ' . $units[ $pow ];
+		return number_format_i18n( $bytes, $precision ) . ' ' . $units[ $pow ];
 	}
 
 	/**
@@ -390,6 +393,20 @@ class CL_DB_Analyzer {
 	 */
 	public static function is_woocommerce_active() {
 		return class_exists( 'WooCommerce' );
+	}
+
+	/**
+	 * Get autoload options limit
+	 *
+	 * Returns the configured limit, capped at 250 maximum.
+	 *
+	 * @return int
+	 */
+	public static function get_autoload_limit() {
+		$limit = defined( 'CL_DB_TOOLS_AUTOLOAD_LIMIT' ) ? absint( CL_DB_TOOLS_AUTOLOAD_LIMIT ) : 100;
+
+		// Cap at 250 maximum
+		return min( $limit, 250 );
 	}
 
 	/**

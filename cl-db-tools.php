@@ -32,6 +32,12 @@ if ( ! defined( 'CL_DB_TOOLS_CACHE_EXPIRATION' ) ) {
 	define( 'CL_DB_TOOLS_CACHE_EXPIRATION', 15 * MINUTE_IN_SECONDS );
 }
 
+// Maximum number of autoload options to display (default: 100, max: 250)
+// Can be customized in wp-config.php: define( 'CL_DB_TOOLS_AUTOLOAD_LIMIT', 150 );
+if ( ! defined( 'CL_DB_TOOLS_AUTOLOAD_LIMIT' ) ) {
+	define( 'CL_DB_TOOLS_AUTOLOAD_LIMIT', 100 );
+}
+
 // Load main plugin class
 require_once CL_DB_TOOLS_PLUGIN_DIR . 'includes/class-cl-db-tools.php';
 

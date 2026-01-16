@@ -78,6 +78,14 @@ By default, database information is cached for 15 minutes to improve performance
 
 Replace 30 with the number of minutes you want. Set to 0 to disable caching (not recommended for production sites).
 
+= How can I change the number of autoload options displayed? =
+
+By default, the plugin displays the 100 largest autoload options. You can customize this by adding the following constant to your wp-config.php file:
+
+`define( 'CL_DB_TOOLS_AUTOLOAD_LIMIT', 150 );`
+
+The maximum allowed value is 250. If you set a higher value, it will be capped at 250.
+
 == Screenshots ==
 
 1. Database Overview - View database statistics and connection information

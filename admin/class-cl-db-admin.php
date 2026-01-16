@@ -472,6 +472,16 @@ class CL_DB_Admin {
 				<?php $this->render_query_box( CL_DB_Query_Builder::get_autoload_options_query(), 'get_autoload' ); ?>
 			</div>
 
+			<p class="description">
+				<?php
+				printf(
+					/* translators: %s: number of options displayed */
+					esc_html__( 'Showing %s largest autoload options by size.', 'cl-db-tools' ),
+					'<strong>' . esc_html( number_format_i18n( $autoload_info['limit'] ) ) . '</strong>'
+				);
+				?>
+			</p>
+
 			<table class="wp-list-table widefat fixed striped">
 				<thead>
 					<tr>
