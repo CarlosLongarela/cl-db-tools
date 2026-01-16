@@ -4,7 +4,7 @@ Donate link: https://tabernawp.com/donaciones/
 Tags: database, optimization, cleanup, performance, mysql
 Requires at least: 5.8
 Tested up to: 6.7
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,12 @@ The maximum allowed value is 250. If you set a higher value, it will be capped a
 6. WooCommerce Tools - Manage WooCommerce sessions (when active)
 
 == Changelog ==
+
+= 1.1.1 =
+* Fixed transient queries displaying incorrect LIKE patterns due to wpdb->prepare() placeholder conflicts
+* Added configurable autoload options limit (CL_DB_TOOLS_AUTOLOAD_LIMIT constant, max 250)
+* Added legend showing number of autoload options displayed
+* Localized number formatting using number_format_i18n() for proper decimal separators
 
 = 1.1.0 =
 * Added new "Tools" tab for utility functions

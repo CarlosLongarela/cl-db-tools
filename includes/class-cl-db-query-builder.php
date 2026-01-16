@@ -403,17 +403,15 @@ class CL_DB_Query_Builder {
 			$limit = 100;
 		}
 
-		return $wpdb->prepare(
-			"SELECT
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe
+		return "SELECT
 				option_name,
 				LENGTH(option_value) as 'size'
 			FROM {$wpdb->options}
 			WHERE option_name LIKE '_transient_timeout_%'
 			AND option_value < UNIX_TIMESTAMP()
 			ORDER BY option_value
-			LIMIT %d",
-			$limit
-		);
+			LIMIT " . absint( $limit );
 	}
 
 	/**
@@ -424,15 +422,11 @@ class CL_DB_Query_Builder {
 	public static function get_delete_expired_transients_query() {
 		global $wpdb;
 
-		$like_pattern = $wpdb->esc_like( '_transient_timeout_' ) . '%';
-
-		return $wpdb->prepare(
-			"DELETE a, b FROM {$wpdb->options} a
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe
+		return "DELETE a, b FROM {$wpdb->options} a
 			LEFT JOIN {$wpdb->options} b ON b.option_name = REPLACE(a.option_name, '_transient_timeout_', '_transient_')
-			WHERE a.option_name LIKE %s
-			AND a.option_value < UNIX_TIMESTAMP()",
-			$like_pattern
-		);
+			WHERE a.option_name LIKE '_transient_timeout_%'
+			AND a.option_value < UNIX_TIMESTAMP()";
 	}
 
 	/**
@@ -449,22 +443,15 @@ class CL_DB_Query_Builder {
 			$limit = 100;
 		}
 
-		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
-		$exclude_pattern = $wpdb->esc_like( '_transient_timeout_' ) . '%';
-
-		return $wpdb->prepare(
-			"SELECT
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe
+		return "SELECT
 				option_name,
 				LENGTH(option_value) as 'size'
 			FROM {$wpdb->options}
-			WHERE option_name LIKE %s
-			AND option_name NOT LIKE %s
+			WHERE option_name LIKE '_transient_%'
+			AND option_name NOT LIKE '_transient_timeout_%'
 			ORDER BY LENGTH(option_value) DESC
-			LIMIT %d",
-			$like_pattern,
-			$exclude_pattern,
-			$limit
-		);
+			LIMIT " . absint( $limit );
 	}
 
 	/**
@@ -475,17 +462,11 @@ class CL_DB_Query_Builder {
 	public static function get_all_transients_count_query() {
 		global $wpdb;
 
-		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
-		$exclude_pattern = $wpdb->esc_like( '_transient_timeout_' ) . '%';
-
-		return $wpdb->prepare(
-			"SELECT COUNT(*) as 'count'
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe
+		return "SELECT COUNT(*) as 'count'
 			FROM {$wpdb->options}
-			WHERE option_name LIKE %s
-			AND option_name NOT LIKE %s",
-			$like_pattern,
-			$exclude_pattern
-		);
+			WHERE option_name LIKE '_transient_%'
+			AND option_name NOT LIKE '_transient_timeout_%'";
 	}
 
 	/**
@@ -496,13 +477,9 @@ class CL_DB_Query_Builder {
 	public static function get_delete_all_transients_query() {
 		global $wpdb;
 
-		$like_pattern = $wpdb->esc_like( '_transient_' ) . '%';
-
-		return $wpdb->prepare(
-			"DELETE FROM {$wpdb->options}
-			WHERE option_name LIKE %s",
-			$like_pattern
-		);
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safe
+		return "DELETE FROM {$wpdb->options}
+			WHERE option_name LIKE '_transient_%'";
 	}
 
 	/**
